@@ -1,0 +1,35 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block content %}
+    <div class="card" style="width: 18rem;">
+        {% if pet.photo %}
+            <img src="{{ pet.photo.url }}"
+                 class="card-img-top"
+                 height="150"
+                 width="auto"
+                 alt="">
+        {% else %}
+            <img src="{% static 'images/default_pet.png' %}"
+                 class="card-img-top"
+                 height="150"
+                 width="auto"
+                 alt="">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">Name: {{ pet.name }}</h5>
+            <div class="card-body">
+                <p class="card-text">
+                    <span style="display:block;">Sex: {{ pet.get_sex_display }}</span>
+                    <span style="display:block;">Age: {{ pet.birthdate|timesince }}</span>
+                    <span style="display:block;">
+                        {% if pet.intact %}
+                            Intact
+                        {% else %}
+                            Spayed/Neutered
+                        {% endif %}
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,3 +1,5 @@
+import datetime
+
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
@@ -9,7 +11,7 @@ class Pet(models.Model):
     sex = models.IntegerField(
         blank=True, null=True, choices=[(0, "Male"), (1, "Female")]
     )
-    age = models.DateField()
+    birthdate = models.DateField()
     intact = models.BooleanField()
     owner = models.ForeignKey("Owner", on_delete=models.CASCADE)
     photo = models.ImageField(upload_to="pet_photos", blank=True, null=True)
@@ -30,6 +32,14 @@ class Pet(models.Model):
                 output_size = (300, 300)
                 img.thumbnail(output_size)
                 img.save(self.photo.path)
+
+    def age(self):
+        today = datetime.date.today()
+        return (
+            today.year
+            - self.birthdate.year
+            - ((today.month, today.day) < (self.birthdate.month, self.birthdate.day))
+        )
 
 
 class Owner(models.Model):

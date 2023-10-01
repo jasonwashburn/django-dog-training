@@ -1,0 +1,16 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block content %}
+    <ul class="list-group">
+        {% for pet in pet_list %}
+            <li class="list-group-item">
+                {% if pet.photo %}
+                    <img src="{{ pet.photo.url }}" height=50 width=50 alt="">
+                {% else %}
+                    <img src="{% static 'images/default_pet.png' %}" height=50 width=50 alt="">
+                {% endif %}
+                <span><a href="{{ pet.get_absolute_url }}">{{ pet.name }}</a></span>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

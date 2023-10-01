@@ -74,11 +74,11 @@ def test_can_create_owner(create_user):
 @pytest.mark.django_db
 def test_can_create_pet(basic_owner):
     pet = Pet.objects.create(
-        name="Fido", sex=0, age="2020-01-01", intact=True, owner=basic_owner
+        name="Fido", sex=0, birthdate="2020-01-01", intact=True, owner=basic_owner
     )
     assert pet.name == "Fido"
     assert pet.sex == 0
-    assert pet.age == "2020-01-01"
+    assert pet.birthdate == "2020-01-01"
     assert pet.intact is True
     assert pet.owner.last_name == "Smith"
     assert pet.owner.first_name == "John"
