@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "django-dog-training"
+version = "0.1.0"
+description = ""
+authors = ["Jason Washburn <jason.washburn@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.5"
+pillow = "^10.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.9.1"
+isort = "^5.12.0"
+ruff = "^0.0.291"
+djlint = "^1.34.0"
+pre-commit = "^3.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+skip = ["migrations", "node_modules", "static", "venv"]
+
+[tool.black]
+exclude = "migrations|node_modules|static|venv"
+
+[tool.ruff.per-file-ignores]
+"settings.py" = ["E501"]
