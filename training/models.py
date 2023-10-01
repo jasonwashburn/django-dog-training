@@ -20,8 +20,8 @@ class Pet(models.Model):
     def get_absolute_url(self):
         return reverse("pet_detail", kwargs={"pk": self.pk})
 
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
         if self.photo:
             img = Image.open(self.photo.path)
